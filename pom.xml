@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.irelandlight.wechat</groupId>
+    <artifactId>wechat-all</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>web</module>
+        <module>service</module>
+        <module>dao</module>
+        <module>common</module>
+        <module>image-server</module>
+        <module>mapper</module>
+        <module>manager</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>4.12</junit.version>
+        <slf4j.version>1.7.12</slf4j.version>
+        <logback.version>1.1.1</logback.version>
+        <mysql-connector-java.version>5.1.24</mysql-connector-java.version>
+        <c3p0.version>0.9.1.2</c3p0.version>
+        <mybatis.version>3.3.0</mybatis.version>
+        <mybatis-spring.version>1.2.2</mybatis-spring.version>
+        <taglibs.version>1.1.2</taglibs.version>
+        <jstl.version>1.2</jstl.version>
+        <com-fasterxml-jackson-core.version>2.5.4</com-fasterxml-jackson-core.version>
+        <javax-servlet.version>3.1.0</javax-servlet.version>
+        <org-springframework.version>4.3.5.RELEASE</org-springframework.version>
+        <jedis.version>2.7.3</jedis.version>
+        <velocity.version>1.7</velocity.version>
+        <velocity-tools-generic.version>1.2</velocity-tools-generic.version>
+        <protostuff.version>1.0.8</protostuff.version>
+        <common-collections.version>3.2.1</common-collections.version>
+        <javaee-web-api.version>7.0</javaee-web-api.version>
+        <jquery.version>2.2.4</jquery.version>
+        <fastjson.version>1.2.20</fastjson.version>
+        <qiniu-java-sdk.version>7.1.1</qiniu-java-sdk.version>
+        <kotlin.version>1.0.6</kotlin.version>
+        <rocketmq.version>3.2.6</rocketmq.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- 使用注解的方式运行jUnit，因此改成4.11 -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- 补全项目依赖 -->
+            <!-- 1.日志：slf4j，log4j，logback，common-logging
+                slf4j是规范/接口
+                日志实现是log4j，logback，common-logging
+                使用slf4j + logback
+            -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <!-- 实现slf4j接口并整合 -->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <!--2.数据库相关的依赖-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector-java.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <!-- 数据库连接池 -->
+            <dependency>
+                <groupId>c3p0</groupId>
+                <artifactId>c3p0</artifactId>
+                <version>${c3p0.version}</version>
+            </dependency>
+
+            <!-- DAO框架依赖 -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <!-- mybatis自身实现了Spring整合依赖 -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis-spring.version}</version>
+            </dependency>
+            <!-- 3.util web相关依赖 -->
+            <dependency>
+                <groupId>taglibs</groupId>
+                <artifactId>standard</artifactId>
+                <version>${taglibs.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jstl</groupId>
+                <artifactId>jstl</artifactId>
+                <version>${jstl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${com-fasterxml-jackson-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javax-servlet.version}</version>
+            </dependency>
+
+            <!-- 4.Spring依赖 -->
+            <!-- (1)核心依赖 -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${org-springframework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${org-springframework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${org-springframework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${org-springframework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>${org-springframework.version}</version>
+            </dependency>
+            <!-- (2)DAO层依赖 -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${org-springframework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${org-springframework.version}</version>
+            </dependency>
+            <!-- (3)SpringWeb依赖 -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${org-springframework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${org-springframework.version}</version>
+            </dependency>
+            <!-- 4.Spring test依赖 -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${org-springframework.version}</version>
+            </dependency>
+            <!-- redis客户端：Jedis -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+
+            <!-- velocity依赖 -->
+            <!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/velocity-tools/velocity-tools-generic -->
+            <dependency>
+                <groupId>velocity-tools</groupId>
+                <artifactId>velocity-tools-generic</artifactId>
+                <version>${velocity-tools-generic.version}</version>
+            </dependency>
+
+            <!-- 序列化 -->
+            <dependency>
+                <groupId>com.dyuproject.protostuff</groupId>
+                <artifactId>protostuff-core</artifactId>
+                <version>${protostuff.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dyuproject.protostuff</groupId>
+                <artifactId>protostuff-runtime</artifactId>
+                <version>${protostuff.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>${common-collections.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-web-api</artifactId>
+                <version>${javaee-web-api.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!--jquery -->
+            <!-- https://mvnrepository.com/artifact/org.webjars/jquery -->
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>jquery</artifactId>
+                <version>${jquery.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.qiniu</groupId>
+                <artifactId>qiniu-java-sdk</artifactId>
+                <version>${qiniu-java-sdk.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.alibaba.rocketmq/rocketmq-all -->
+            <dependency>
+                <groupId>com.alibaba.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>${rocketmq.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.rocketmq</groupId>
+                <artifactId>rocketmq-all</artifactId>
+                <version>${rocketmq.version}</version>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
