@@ -3,7 +3,6 @@ package com.irelandlight.service.serviceimpl;
 import com.irelandlight.BaseJunitTest;
 import com.irelandlight.model.Goods;
 import org.junit.Test;
-import org.springframework.context.annotation.Lazy;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,7 +20,6 @@ public class GoodsServiceImplTest extends BaseJunitTest{
     public void findItemsList() throws Exception {
          List<Goods> list = goodsService.findItemsList();
          System.out.println("666");
-
 
     }
 

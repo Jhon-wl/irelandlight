@@ -45,7 +45,7 @@
     <!--拦截器注解-->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/viewAll.form"/>
+            <mvc:mapping path="/*"/>
             <bean class="com.irelandlight.Interceptor.TestInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
